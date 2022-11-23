@@ -1,0 +1,15 @@
+C:\Users\Oleksandr\Desktop\Object - Oriented Programming Concepts 420-CT2-AS\Assignments\2022.11.15_Project\Project\obj\Debug\net6.0\Project.csproj.AssemblyReference.cache
+C:\Users\Oleksandr\Desktop\Object - Oriented Programming Concepts 420-CT2-AS\Assignments\2022.11.15_Project\Project\obj\Debug\net6.0\Project.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Oleksandr\Desktop\Object - Oriented Programming Concepts 420-CT2-AS\Assignments\2022.11.15_Project\Project\obj\Debug\net6.0\Project.AssemblyInfoInputs.cache
+C:\Users\Oleksandr\Desktop\Object - Oriented Programming Concepts 420-CT2-AS\Assignments\2022.11.15_Project\Project\obj\Debug\net6.0\Project.AssemblyInfo.cs
+C:\Users\Oleksandr\Desktop\Object - Oriented Programming Concepts 420-CT2-AS\Assignments\2022.11.15_Project\Project\obj\Debug\net6.0\Project.csproj.CoreCompileInputs.cache
+C:\Users\Oleksandr\Desktop\Object - Oriented Programming Concepts 420-CT2-AS\Assignments\2022.11.15_Project\Project\bin\Debug\net6.0\Project.exe
+C:\Users\Oleksandr\Desktop\Object - Oriented Programming Concepts 420-CT2-AS\Assignments\2022.11.15_Project\Project\bin\Debug\net6.0\Project.deps.json
+C:\Users\Oleksandr\Desktop\Object - Oriented Programming Concepts 420-CT2-AS\Assignments\2022.11.15_Project\Project\bin\Debug\net6.0\Project.runtimeconfig.json
+C:\Users\Oleksandr\Desktop\Object - Oriented Programming Concepts 420-CT2-AS\Assignments\2022.11.15_Project\Project\bin\Debug\net6.0\Project.dll
+C:\Users\Oleksandr\Desktop\Object - Oriented Programming Concepts 420-CT2-AS\Assignments\2022.11.15_Project\Project\bin\Debug\net6.0\Project.pdb
+C:\Users\Oleksandr\Desktop\Object - Oriented Programming Concepts 420-CT2-AS\Assignments\2022.11.15_Project\Project\obj\Debug\net6.0\Project.dll
+C:\Users\Oleksandr\Desktop\Object - Oriented Programming Concepts 420-CT2-AS\Assignments\2022.11.15_Project\Project\obj\Debug\net6.0\refint\Project.dll
+C:\Users\Oleksandr\Desktop\Object - Oriented Programming Concepts 420-CT2-AS\Assignments\2022.11.15_Project\Project\obj\Debug\net6.0\Project.pdb
+C:\Users\Oleksandr\Desktop\Object - Oriented Programming Concepts 420-CT2-AS\Assignments\2022.11.15_Project\Project\obj\Debug\net6.0\Project.genruntimeconfig.cache
+C:\Users\Oleksandr\Desktop\Object - Oriented Programming Concepts 420-CT2-AS\Assignments\2022.11.15_Project\Project\obj\Debug\net6.0\ref\Project.dll
