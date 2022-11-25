@@ -26,9 +26,15 @@ class Program {
             if(password.ToLower() == "password"){
                 Console.WriteLine("Access Granted!");
                 do {
-                    do {                       
-                        Console.Write("\nHow many computers would you like to enter?: ");
-                        if (!Int32.TryParse(Console.ReadLine(), out pcNum)) {
+                    if(storeCapacity > 0){
+                        Console.WriteLine($"\nYou can create {storeCapacity} computer(s)");
+                    }else {
+                        Console.WriteLine($"Stores reached maximum capacity!");
+                        break;
+                    } 
+                    do {                        
+                        Console.Write("How many computers would you like to enter?: ");
+                        if (!Int32.TryParse(Console.ReadLine(), out pcNum) || pcNum < 0) {
                             Console.WriteLine("Invalid input!");
                         }else{
                             exit = true;
@@ -89,13 +95,11 @@ class Program {
                     Console.WriteLine($"{tries} tries left");
                 }else if(tries == 1) {
                     Console.WriteLine($"{tries} try left");
-                }else if(tries == 0) {
-                    Console.WriteLine("Last try");
                 }else {
                     Console.WriteLine("Goodbye!");
                 }
             }            
-        } while(tries >= 0);
+        } while(tries >= 1);
     }
 
 
@@ -168,7 +172,7 @@ class Program {
                                 case '3':
                                     do{
                                         Console.Write("New Serial Number: ");
-                                        if (!Int64.TryParse(Console.ReadLine(), out sn)) {
+                                        if (!Int64.TryParse(Console.ReadLine(), out sn) || sn <= 0) {
                                             Console.WriteLine("Invalid input!");
                                         }else{
                                             arr[num - 1].setSN(sn);
@@ -219,13 +223,11 @@ class Program {
                     Console.WriteLine($"{tries} tries left");
                 }else if(tries == 1) {
                     Console.WriteLine($"{tries} try left");
-                }else if(tries == 0) {
-                    Console.WriteLine("Last try");
                 }else {
                     Console.WriteLine("Goodbye!");
                 }
             }
-        } while(tries >= 0);        
+        } while(tries >= 1);        
     }
 
 
@@ -234,37 +236,70 @@ class Program {
 
         Console.Write("Enter brand: ");
         brand = Console.ReadLine() ?? string.Empty;
-        for (int i = 0; i < arr.Length; i++) {
-            if(arr[i] != null) {
-                if(brand.ToLower() == arr[i].getBrand().ToLower()) {
-                    Console.Write($"{i + 1}. ");
-                    arr[i].showComputer();
+        if(Computer.findNumberOfCreatedComputers() > 0) {
+            if(arr.ToList().Exists(c => c is not null && c.getBrand().ToLower() == brand.ToLower())){
+                foreach(var c in arr.ToList().FindAll(f => f is not null && f.getBrand().ToLower() == brand.ToLower())) {
+                    c.showComputer();
                 }
+            }else {
+                Console.WriteLine("Brand doesn't exist in store!");
             }
-        }        
+        }else {
+            Console.WriteLine("There are no computers in store?!");
+        }
+
+
+        // for (int i = 0; i < arr.Length; i++) {
+        //     if(arr[i] != null) {
+        //         if(brand.ToLower() == arr[i].getBrand().ToLower()) {
+        //             Console.Write($"{i + 1}. ");
+        //             arr[i].showComputer();
+        //         }else {
+        //             Console.WriteLine("Brand doesn't exist in store!");
+        //             break;
+        //         }
+        //     }else {
+        //         Console.WriteLine("There are no computers in store?!");
+        //         break;
+        //     }
+        // }        
     }
 
 
     public static void findCheaperThan(Computer[] arr) {
         double price;
-        bool exit = false;
-
-        do {                       
-            Console.Write("Enter price: $");
-            if (!Double.TryParse(Console.ReadLine(), out price)) {
-                Console.WriteLine("Invalid input!");
-            }else{
-                exit = true;
-            }     
-        }while(!exit);
-        for (int i = 0; i < arr.Length; i++) {
-            if(arr[i] != null) {
-                if(price >= arr[i].getPrice()) {
-                    Console.Write($"{i + 1}. ");
-                    arr[i].showComputer();
+        bool exit = false, exit2 = false;
+        do{
+            do {                       
+                Console.Write("Enter price: $");
+                if (!Double.TryParse(Console.ReadLine(), out price)) {
+                    Console.WriteLine("Invalid input!");
+                }else{
+                    exit = true;
+                }     
+            }while(!exit);
+            
+            for (int i = 0; i < arr.Length; i++) {
+                if(arr[i] != null) {
+                    if(price >= arr[i].getPrice()) {
+                        Console.Write($"{i + 1}. ");
+                        arr[i].showComputer();
+                        exit2 = true;
+                    }else {
+                        Console.WriteLine("Computers with this price doesn't exist!");
+                        exit2 = true;
+                        break;
+                    }
+                }else if(price < 0) {
+                    Console.WriteLine("Wrong amount!");
+                    break;
+                }else {
+                    Console.WriteLine("There are no computers in store?!");
+                    exit2 = true;
+                    break;                    
                 }
             }
-        }
+        }while(!exit2);
     }
 
 
@@ -276,7 +311,7 @@ class Program {
         Console.WriteLine("Welcome to 'Super-Duper Computers'!");       
         do{
             Console.Write($"What is maximum Store Capacity today?: ");
-            if (!Int32.TryParse(Console.ReadLine(), out storeCapacity)) {
+            if (!Int32.TryParse(Console.ReadLine(), out storeCapacity) || storeCapacity <= 0) {
                 Console.WriteLine("Invalid input!");
             }else{
                 exit = true;
