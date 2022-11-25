@@ -29,7 +29,7 @@ class Program {
                     if(storeCapacity > 0){
                         Console.WriteLine($"\nYou can create {storeCapacity} computer(s)");
                     }else {
-                        Console.WriteLine($"Stores reached maximum capacity!");
+                        Console.WriteLine($"Store've reached maximum capacity!");
                         break;
                     } 
                     do {                        
@@ -96,7 +96,7 @@ class Program {
                 }else if(tries == 1) {
                     Console.WriteLine($"{tries} try left");
                 }else {
-                    Console.WriteLine("Goodbye!");
+                    Console.WriteLine("Access Denied!");
                 }
             }            
         } while(tries >= 1);
@@ -206,7 +206,7 @@ class Program {
                             Console.Write($"{num}. ");
                             arr[num - 1].showComputer();
                         }else {
-                            Console.WriteLine("Would you like to quit? (y/n): ");
+                            Console.Write("Would you like to quit? (y/n): ");
                             char opt = Convert.ToChar(Console.ReadLine() ?? string.Empty);
                             if(opt == 'y' || opt == 'Y') {
                                 break;
@@ -215,6 +215,8 @@ class Program {
                             }
                         }
                     } while(num > Computer.findNumberOfCreatedComputers() || num <= 0);
+                }else {
+                    Console.WriteLine("Nothing to change!");
                 }
                 break;
             }else{
@@ -224,7 +226,7 @@ class Program {
                 }else if(tries == 1) {
                     Console.WriteLine($"{tries} try left");
                 }else {
-                    Console.WriteLine("Goodbye!");
+                    Console.WriteLine("Access Denied!");
                 }
             }
         } while(tries >= 1);        
@@ -233,73 +235,60 @@ class Program {
 
     public static void findComputersByBrand(Computer[] arr) {
         string brand;
+        int flag = arr.Length;
 
         Console.Write("Enter brand: ");
         brand = Console.ReadLine() ?? string.Empty;
-        if(Computer.findNumberOfCreatedComputers() > 0) {
-            if(arr.ToList().Exists(c => c is not null && c.getBrand().ToLower() == brand.ToLower())){
-                foreach(var c in arr.ToList().FindAll(f => f is not null && f.getBrand().ToLower() == brand.ToLower())) {
-                    c.showComputer();
+        for (int i = 0; i < arr.Length; i++) {
+            if(arr[i] != null) {
+                if(brand.ToLower() == arr[i].getBrand().ToLower()) {
+                    Console.Write($"{i + 1}. ");
+                    arr[i].showComputer();
+                    flag--;
                 }
-            }else {
-                Console.WriteLine("Brand doesn't exist in store!");
+            }else if (Computer.findNumberOfCreatedComputers() == 0) {
+                Console.WriteLine("Computer with this brand doesn't exist in the store!");
+                Console.WriteLine("There are no computers in store!");
+                break;
             }
-        }else {
-            Console.WriteLine("There are no computers in store?!");
         }
-
-
-        // for (int i = 0; i < arr.Length; i++) {
-        //     if(arr[i] != null) {
-        //         if(brand.ToLower() == arr[i].getBrand().ToLower()) {
-        //             Console.Write($"{i + 1}. ");
-        //             arr[i].showComputer();
-        //         }else {
-        //             Console.WriteLine("Brand doesn't exist in store!");
-        //             break;
-        //         }
-        //     }else {
-        //         Console.WriteLine("There are no computers in store?!");
-        //         break;
-        //     }
-        // }        
+        if(Computer.findNumberOfCreatedComputers() != 0 && flag == arr.Length) {
+            Console.WriteLine("There are no computers with this brand in the store!");
+        }
     }
 
 
     public static void findCheaperThan(Computer[] arr) {
         double price;
-        bool exit = false, exit2 = false;
-        do{
+        bool exit = false;
+        int flag = arr.Length;
+
             do {                       
                 Console.Write("Enter price: $");
-                if (!Double.TryParse(Console.ReadLine(), out price)) {
+                if (!Double.TryParse(Console.ReadLine(), out price) || price < 0) {
                     Console.WriteLine("Invalid input!");
-                }else{
-                    exit = true;
-                }     
-            }while(!exit);
-            
-            for (int i = 0; i < arr.Length; i++) {
-                if(arr[i] != null) {
-                    if(price >= arr[i].getPrice()) {
-                        Console.Write($"{i + 1}. ");
-                        arr[i].showComputer();
-                        exit2 = true;
-                    }else {
-                        Console.WriteLine("Computers with this price doesn't exist!");
-                        exit2 = true;
-                        break;
-                    }
-                }else if(price < 0) {
-                    Console.WriteLine("Wrong amount!");
-                    break;
                 }else {
-                    Console.WriteLine("There are no computers in store?!");
-                    exit2 = true;
-                    break;                    
+                    for (int i = 0; i < arr.Length; i++) {
+                        if(arr[i] != null) {
+                            if(price >= arr[i].getPrice()) {
+                                Console.Write($"{i + 1}. ");
+                                arr[i].showComputer();
+                                flag--;
+                                exit = true;
+                            }
+                        }else if (Computer.findNumberOfCreatedComputers() == 0){
+                            Console.WriteLine("No computers to show!");
+                            Console.WriteLine("There are no computers in store!");
+                            exit = true;
+                            break;                    
+                        }
+                    }
+                    if(Computer.findNumberOfCreatedComputers() != 0 && flag == arr.Length) {
+                        Console.WriteLine("No computers to show!");
+                        exit = true;
+                    }
                 }
-            }
-        }while(!exit2);
+            }while(!exit);           
     }
 
 
