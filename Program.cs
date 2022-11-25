@@ -374,6 +374,12 @@ class Program {
                 }
                 Console.WriteLine("Good bye!");
                 Console.WriteLine("Exiting program...");
+
+                string[] textFile = System.IO.File.ReadAllLines(@"C:\Users\Oleksandr\Desktop\Object - Oriented Programming Concepts 420-CT2-AS\Assignments\2022.11.15_Project\computerList.txt");
+                System.Console.WriteLine("\nContents of computerList.txt file:");
+                foreach (string line in textFile) {
+                    Console.WriteLine("\t" + line);
+                }
                 break;
 
             default:
