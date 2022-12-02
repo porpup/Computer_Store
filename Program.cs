@@ -292,9 +292,36 @@ class Program {
     }
 
 
+    public static void writeReadFile(Computer[] arr){
+        string computerList = "computerList.txt";
+        try {  
+            using (StreamWriter textList = new StreamWriter(computerList)) {
+                textList.WriteLine("List of PC(s) in 'Super-Duper Computers' store:\n");
+                for (int i = 0; i < arr.Length; i++) {            
+                    if(arr[i] != null){
+                        textList.WriteLine("-------------------------------");
+                        textList.WriteLine($"{i + 1}. Computer:");
+                        textList.WriteLine($"\t\tBrand: {arr[i].getBrand()}");
+                        textList.WriteLine($"\t\tModel: {arr[i].getModel()}");
+                        textList.WriteLine($"\t\tSN:    {arr[i].getSN()}");
+                        textList.WriteLine($"\t\tPrice: ${arr[i].getPrice()}");
+                    }
+                }
+            }  
+        } catch(Exception exp) {  
+            Console.Write(exp.Message);  
+        }
+
+        string[] textFile = System.IO.File.ReadAllLines("computerList.txt");
+        System.Console.WriteLine("\nContents of computerList.txt file:");
+        foreach (string line in textFile) {
+            Console.WriteLine("\t" + line);
+        }
+    }
+
+
     static void Main(string[] args) {
         char option;
-        string computerList;
         bool exit = false, exit2 = false;
 
         Console.WriteLine("Welcome to 'Super-Duper Computers'!");       
@@ -353,33 +380,10 @@ class Program {
                 break;
 
             case '5':
-                Console.Clear();
-                computerList = @"C:\Users\Oleksandr\Desktop\Object - Oriented Programming Concepts 420-CT2-AS\Assignments\2022.11.15_Project\computerList.txt";
-                try {  
-                    using (StreamWriter textList = new StreamWriter(computerList)) {
-                        textList.WriteLine("List of PC(s) in 'Super-Duper Computers' store:\n");
-                        for (int i = 0; i < inventory.Length; i++) {            
-                            if(inventory[i] != null){
-                                textList.WriteLine("-------------------------------");
-                                textList.WriteLine($"{i + 1}. Computer:");
-                                textList.WriteLine($"\t\tBrand: {inventory[i].getBrand()}");
-                                textList.WriteLine($"\t\tModel: {inventory[i].getModel()}");
-                                textList.WriteLine($"\t\tSN:    {inventory[i].getSN()}");
-                                textList.WriteLine($"\t\tPrice: ${inventory[i].getPrice()}");
-                            }
-                        }
-                    }  
-                } catch(Exception exp) {  
-                    Console.Write(exp.Message);  
-                }
+                Console.Clear();                
                 Console.WriteLine("Good bye!");
                 Console.WriteLine("Exiting program...");
-
-                string[] textFile = System.IO.File.ReadAllLines(@"C:\Users\Oleksandr\Desktop\Object - Oriented Programming Concepts 420-CT2-AS\Assignments\2022.11.15_Project\computerList.txt");
-                System.Console.WriteLine("\nContents of computerList.txt file:");
-                foreach (string line in textFile) {
-                    Console.WriteLine("\t" + line);
-                }
+                writeReadFile(inventory);
                 break;
 
             default:
